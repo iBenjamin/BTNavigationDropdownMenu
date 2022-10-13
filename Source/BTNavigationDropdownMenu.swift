@@ -175,7 +175,7 @@ open class BTNavigationDropdownMenu: UIView {
             return self.configuration.arrowImage
         }
         set(value) {
-            self.configuration.arrowImage = value.withRenderingMode(.alwaysTemplate)
+            self.configuration.arrowImage = value.withRenderingMode(.alwaysOriginal)
             self.menuArrow.image = self.configuration.arrowImage
         }
     }
