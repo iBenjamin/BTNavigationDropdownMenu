@@ -11,4 +11,9 @@ import Foundation
 public struct BTNavigationDropdownMenuDataSource {
     public var title: String
     public var subTitle: String?
+    
+    public init(title: String, subTitle: String? = nil) {
+        self.title = title
+        self.subTitle = subTitle
+    }
 }
