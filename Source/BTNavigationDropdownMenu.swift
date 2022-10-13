@@ -26,11 +26,6 @@
 
 import UIKit
 
-public struct BTNavigationDropdownMenuDataSource {
-    var title: String
-    var subTitle: String?
-}
-
 // MARK: BTNavigationDropdownMenu
 open class BTNavigationDropdownMenu: UIView {
 
