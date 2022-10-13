@@ -26,9 +26,16 @@
 
 import UIKit
 
+public protocol BTNavigationDropdownMenuDelegate: AnyObject {
+    func btNavigationDropdownMenuShowMenu()
+    func btNavigationDropdownMenuHideMenu()
+}
+
 // MARK: BTNavigationDropdownMenu
 open class BTNavigationDropdownMenu: UIView {
-
+    
+    public weak var delegate: BTNavigationDropdownMenuDelegate?
+    
     // The color of menu title. Default is darkGrayColor()
     open var menuTitleColor: UIColor! {
         get {
@@ -460,6 +467,8 @@ open class BTNavigationDropdownMenu: UIView {
     }
 
     func showMenu() {
+        self.delegate?.btNavigationDropdownMenuShowMenu()
+        
         self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
 
         self.isShown = true
@@ -502,6 +511,8 @@ open class BTNavigationDropdownMenu: UIView {
     }
 
     @objc func hideMenu() {
+        self.delegate?.btNavigationDropdownMenuHideMenu()
+        
         // Rotate arrow
         self.rotateArrow()
 
