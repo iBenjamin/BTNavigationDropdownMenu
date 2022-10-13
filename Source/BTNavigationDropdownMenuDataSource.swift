@@ -9,6 +9,6 @@
 import Foundation
 
 public struct BTNavigationDropdownMenuDataSource {
-    var title: String
-    var subTitle: String?
+    public var title: String
+    public var subTitle: String?
 }
