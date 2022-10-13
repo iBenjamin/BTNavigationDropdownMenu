@@ -25,7 +25,7 @@ import UIKit
 
 class BTTableViewCell: UITableViewCell {
     let checkmarkIconWidth: CGFloat = 50
-    let horizontalMargin: CGFloat = 20
+    let horizontalMargin: CGFloat = 24
     
     var checkmarkIcon: UIImageView!
     var cellContentFrame: CGRect!
@@ -43,6 +43,10 @@ class BTTableViewCell: UITableViewCell {
         self.textLabel!.textColor = self.configuration.cellTextLabelColor
         self.textLabel!.font = self.configuration.cellTextLabelFont
         self.textLabel!.textAlignment = self.configuration.cellTextLabelAlignment
+        self.detailTextLabel?.textColor = self.configuration.cellDetailLabelTextColor
+        self.detailTextLabel?.font = self.configuration.cellDetailLabelFont
+        self.detailTextLabel?.textAlignment = self.configuration.cellTextLabelAlignment
+        
         if self.textLabel!.textAlignment == .center {
             self.textLabel!.frame = CGRect(x: 0, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
         } else if self.textLabel!.textAlignment == .left {
@@ -53,11 +57,11 @@ class BTTableViewCell: UITableViewCell {
         
         // Checkmark icon
         if self.textLabel!.textAlignment == .center {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 18)/2, width: 18, height: 18))
         } else if self.textLabel!.textAlignment == .left {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 18)/2, width: 18, height: 18))
         } else {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: horizontalMargin, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: horizontalMargin, y: (cellContentFrame.height - 18)/2, width: 18, height: 18))
         }
         self.checkmarkIcon.image = self.configuration.checkMarkImage
         self.checkmarkIcon.contentMode = UIView.ContentMode.scaleAspectFill
@@ -85,8 +89,8 @@ class BTTableViewCell: UITableViewCell {
             if self.textLabel!.textAlignment == .center {
                 self.textLabel!.frame = CGRect(x: 0, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
             } else if self.textLabel!.textAlignment == .left {
-                self.textLabel!.frame = CGRect(x: horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height - size.height + 2)
-                self.detailTextLabel?.frame = .init(x: horizontalMargin, y: cellContentFrame.height - size.height - 5, width: cellContentFrame.width, height: size.height)
+                self.textLabel!.frame = CGRect(x: horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height - size.height + 2 - 8)
+                self.detailTextLabel?.frame = .init(x: horizontalMargin, y: self.textLabel!.frame.height, width: cellContentFrame.width, height: size.height)
             } else {
                 self.textLabel!.frame = CGRect(x: -horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
             }
@@ -99,6 +103,26 @@ class BTTableViewCell: UITableViewCell {
                 self.textLabel!.frame = CGRect(x: -horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
             }
             self.detailTextLabel?.frame = .zero
+        }
+    }
+    
+    func showRoundedBottomCorner(show: Bool) {
+        if show {
+            let maskPath = UIBezierPath(
+                roundedRect: cellContentFrame,
+                byRoundingCorners: [.bottomLeft, .bottomRight],
+                cornerRadii: CGSize(width: 15, height: 15))
+            let shape = CAShapeLayer()
+            shape.path = maskPath.cgPath
+            self.layer.mask = shape
+        } else {
+            let maskPath = UIBezierPath(
+                roundedRect: cellContentFrame,
+                byRoundingCorners: [.bottomLeft, .bottomRight],
+                cornerRadii: CGSize(width: 0, height: 0))
+            let shape = CAShapeLayer()
+            shape.path = maskPath.cgPath
+            self.layer.mask = shape
         }
     }
 }

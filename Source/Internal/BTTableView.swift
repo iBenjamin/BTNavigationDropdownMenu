@@ -84,6 +84,11 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             cell.checkmarkIcon.image = self.configuration.uncheckMarkImage
         }
         cell.updateLayout()
+        if indexPath.row == items.count - 1 {
+            cell.showRoundedBottomCorner(show: true)
+        } else {
+            cell.showRoundedBottomCorner(show: false)
+        }
         return cell
     }
     

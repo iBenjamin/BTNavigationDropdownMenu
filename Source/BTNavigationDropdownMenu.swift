@@ -386,7 +386,7 @@ open class BTNavigationDropdownMenu: UIView {
         // Add background view & table view to container view
         self.menuWrapper.addSubview(self.backgroundView)
         self.menuWrapper.addSubview(self.tableView)
-
+        
         // Add Line on top
         self.topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: menuWrapperBounds.size.width, height: 0.5))
         self.topSeparator.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
