@@ -59,7 +59,6 @@ class BTTableViewCell: UITableViewCell {
         } else {
             self.checkmarkIcon = UIImageView(frame: CGRect(x: horizontalMargin, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
         }
-        self.checkmarkIcon.isHidden = true
         self.checkmarkIcon.image = self.configuration.checkMarkImage
         self.checkmarkIcon.contentMode = UIView.ContentMode.scaleAspectFill
         self.contentView.addSubview(self.checkmarkIcon)
@@ -79,5 +78,27 @@ class BTTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         self.bounds = cellContentFrame
         self.contentView.frame = self.bounds
+    }
+    
+    func updateLayout() {
+        if detailTextLabel?.text != nil, let size = detailTextLabel?.intrinsicContentSize {
+            if self.textLabel!.textAlignment == .center {
+                self.textLabel!.frame = CGRect(x: 0, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
+            } else if self.textLabel!.textAlignment == .left {
+                self.textLabel!.frame = CGRect(x: horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height - size.height + 2)
+                self.detailTextLabel?.frame = .init(x: horizontalMargin, y: cellContentFrame.height - size.height - 5, width: cellContentFrame.width, height: size.height)
+            } else {
+                self.textLabel!.frame = CGRect(x: -horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
+            }
+        } else {
+            if self.textLabel!.textAlignment == .center {
+                self.textLabel!.frame = CGRect(x: 0, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
+            } else if self.textLabel!.textAlignment == .left {
+                self.textLabel!.frame = CGRect(x: horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
+            } else {
+                self.textLabel!.frame = CGRect(x: -horizontalMargin, y: 0, width: cellContentFrame.width, height: cellContentFrame.height)
+            }
+            self.detailTextLabel?.frame = .zero
+        }
     }
 }

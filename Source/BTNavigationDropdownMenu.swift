@@ -26,6 +26,11 @@
 
 import UIKit
 
+public struct BTNavigationDropdownMenuDataSource {
+    var title: String
+    var subTitle: String?
+}
+
 // MARK: BTNavigationDropdownMenu
 open class BTNavigationDropdownMenu: UIView {
 
@@ -220,6 +225,33 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
 
+    open var cellDetailLabelFont: UIFont {
+        get {
+            return self.configuration.cellDetailLabelFont
+        }
+        set(value) {
+            self.configuration.cellDetailLabelFont = value
+        }
+    }
+    
+    open var cellDetailLabelTextColor: UIColor {
+        get {
+            return self.configuration.cellDetailLabelTextColor
+        }
+        set(value) {
+            self.configuration.cellDetailLabelTextColor = value
+        }
+    }
+    
+    open var uncheckMarkImage: UIImage {
+        get {
+            return self.configuration.uncheckMarkImage
+        }
+        set(value) {
+            self.configuration.uncheckMarkImage = value
+        }
+    }
+    
     open var didSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
     open var isShown: Bool!
 
@@ -231,7 +263,7 @@ open class BTNavigationDropdownMenu: UIView {
     fileprivate var menuArrow: UIImageView!
     fileprivate var backgroundView: UIView!
     fileprivate var tableView: BTTableView!
-    fileprivate var items: [String]!
+    fileprivate var items: [BTNavigationDropdownMenuDataSource]!
     fileprivate var menuWrapper: UIView!
 
     required public init?(coder aDecoder: NSCoder) {
@@ -248,7 +280,7 @@ open class BTNavigationDropdownMenu: UIView {
         - title: A string to define title to be displayed.
         - items: The array of items to select
      */
-    public convenience init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: String, items: [String]) {
+    public convenience init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: String, items: [BTNavigationDropdownMenuDataSource]) {
 
         self.init(navigationController: navigationController, containerView: containerView, title: BTTitle.title(title), items: items)
     }
@@ -265,7 +297,7 @@ open class BTNavigationDropdownMenu: UIView {
         - title: An enum to define title to be displayed, can be a string or index of items.
         - items: The array of items to select
      */
-    public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: BTTitle, items: [String]) {
+    public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: BTTitle, items: [BTNavigationDropdownMenuDataSource]) {
         // Key window
         guard let window = UIApplication.shared.keyWindow else {
             super.init(frame: CGRect.zero)
@@ -286,7 +318,7 @@ open class BTNavigationDropdownMenu: UIView {
         switch title{
         case .index(let index):
             if index < items.count{
-                titleToDisplay = items[index]
+                titleToDisplay = items[index].title
             } else {
                 titleToDisplay = ""
             }
@@ -350,7 +382,7 @@ open class BTNavigationDropdownMenu: UIView {
             }
             selfie.didSelectItemAtIndexHandler!(indexPath)
             if selfie.shouldChangeTitleText! {
-                selfie.setMenuTitle("\(selfie.tableView.items[indexPath])")
+                selfie.setMenuTitle("\(selfie.tableView.items[indexPath].title)")
             }
             self?.hideMenu()
             self?.layoutSubviews()
@@ -407,7 +439,7 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
 
-    open func updateItems(_ items: [String]) {
+    open func updateItems(_ items: [BTNavigationDropdownMenuDataSource]) {
         if !items.isEmpty {
             self.tableView.items = items
             self.tableView.reloadData()

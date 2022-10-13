@@ -31,9 +31,12 @@ final class BTConfiguration {
     var cellTextLabelColor: UIColor?
     var selectedCellTextLabelColor: UIColor?
     var cellTextLabelFont: UIFont!
+    var cellDetailLabelFont: UIFont!
+    var cellDetailLabelTextColor: UIColor!
     var navigationBarTitleFont: UIFont
     var cellTextLabelAlignment: NSTextAlignment!
     var cellSelectionColor: UIColor?
+    var uncheckMarkImage: UIImage!
     var checkMarkImage: UIImage!
     var shouldKeepSelectedCellColor: Bool!
     var arrowTintColor: UIColor?
@@ -61,9 +64,12 @@ final class BTConfiguration {
         self.cellTextLabelColor = UIColor.darkGray
         self.selectedCellTextLabelColor = UIColor.darkGray
         self.cellTextLabelFont = UIFont.systemFont(ofSize: 17, weight: .bold)
+        self.cellDetailLabelTextColor = .darkGray
+        self.cellDetailLabelFont = .systemFont(ofSize: 12)
         self.navigationBarTitleFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.cellTextLabelAlignment = NSTextAlignment.left
         self.cellSelectionColor = UIColor.lightGray
+        self.uncheckMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
         self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
         self.shouldKeepSelectedCellColor = false
         self.animationDuration = 0.5
