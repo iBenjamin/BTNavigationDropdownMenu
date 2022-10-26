@@ -453,7 +453,7 @@ open class BTNavigationDropdownMenu: UIView {
         self.tableView.reloadData()
 
         if self.shouldChangeTitleText! {
-            self.setMenuTitle("\(self.tableView.items[index])")
+            self.setMenuTitle("\(self.tableView.items[index].title)")
         }
     }
 

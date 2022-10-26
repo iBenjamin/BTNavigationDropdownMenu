@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let items = [BTNavigationDropdownMenuDataSource(title: "Most Popular"), BTNavigationDropdownMenuDataSource(title: "Latest"),
                      BTNavigationDropdownMenuDataSource(title: "Trending"), BTNavigationDropdownMenuDataSource(title: "Nearest"),
-                     BTNavigationDropdownMenuDataSource(title: "Top Picks", subTitle: "12333")]
+                     BTNavigationDropdownMenuDataSource(title: "Top Pickfsdfasdfasdfasdfasdfasdfasdfs", subTitle: "12333")]
         self.selectedCellLabel.text = items.first?.title
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
