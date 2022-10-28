@@ -413,10 +413,10 @@ open class BTNavigationDropdownMenu: UIView {
 
     override open func layoutSubviews() {
         self.menuTitle.sizeToFit()
-        self.menuTitle.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
+        self.menuTitle.center = CGPoint(x: self.frame.size.width/2 - 10, y: self.frame.size.height/2)
         self.menuTitle.textColor = self.configuration.menuTitleColor
         self.menuArrow.sizeToFit()
-        self.menuArrow.center = CGPoint(x: self.menuTitle.frame.maxX + self.configuration.arrowPadding, y: self.frame.size.height/2)
+        self.menuArrow.center = CGPoint(x: self.frame.maxX - 9 - 8, y: self.frame.size.height/2)
         self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
         self.tableView.reloadData()
     }
